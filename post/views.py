@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from .models import Post
 
 def index(request):
-    return HttpResponse("posts here hi")
+    return HttpResponse("<a href=\"/posts/\">posts here hi</a>")
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
