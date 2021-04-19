@@ -13,7 +13,11 @@ def index(request):
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    return HttpResponse(post.content)
+    context = {
+        'post' : post
+    }
+    return render(request, "post/detail.html", context)
+    
 
 def post_list_view(request):
     post_objects = Post.objects.order_by("pub_date");

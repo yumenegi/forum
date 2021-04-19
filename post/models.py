@@ -25,11 +25,12 @@ class Post(models.Model):
     id = models.BigAutoField(primary_key=True)
     userPosted = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True)
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE,null=True, blank=True)
+    title = models.CharField(max_length=30)
     content = models.CharField(max_length=500)
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return (str(self.id) + ': "' + self.content + '"' + " by " + str(self.userPosted))
+        return (str(self.id) + ': "' + self.title + '"' + " by " + str(self.userPosted))
 
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
