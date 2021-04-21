@@ -13,6 +13,14 @@
     <div class="container">
       <form action="" method="post">
         {% csrf_token %}
+        <!-- <label for="id_userPosted">User Posted: </label>
+        {{form.userPosted}}<br>
+        <label for="id_thread">Thread: </label>
+        {{form.thread}}<br>
+        <label for="id_title">Post Title: </label>
+        {{form.title}}<br>
+        <label for="id_content">Post Content: </label>
+        {{form.content}}<br> -->
         {{form}}
         <input type="submit" value="Submit">
       </form>
