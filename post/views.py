@@ -54,6 +54,15 @@ def detail(request, post_id):
 #         }
 #         return render(request, 'post/newPost.html', context)
 
+class LogIn(View):
+    def get(self, request):
+        context={}
+        return render(request, "post/logIn.html", context)
+
+    def post(self, request):
+        print(request.POST["username"])
+        print(request.POST["password"])
+        return HttpResponse('hi')
 
 class NewPost(View):
     def get(self, request):
@@ -87,8 +96,8 @@ class NewPost(View):
 
         # return HttpResponse('invalid')
 
-
 def post_list_view(request):
     post_objects = Post.objects.order_by("pub_date")
     context = {"post_objects": post_objects}
     return render(request, "post/index.html", context)
+
