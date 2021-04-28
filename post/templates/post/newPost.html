@@ -18,9 +18,9 @@
         <label for="id_thread">Thread: </label>
         {{form.thread}}<br>
         <label for="id_title">Post Title: </label>
-        <input type="text" class="form-control" name="title" value="123" maxlength="30" required id="id_title"><br>
+        <input type="text" class="form-control" name="title" maxlength="30" required id="id_title" placeholder="Enter the post title here"><br>
         <label for="id_content">Post Content: </label>
-        {{form.content}}<br>
+        <input type="text" class="form-control" name="content" maxlength="30" required id="id_content" placeholder="Enter the post content here"><br>
         <!-- {{form}} -->
         <input type="submit" value="Submit">
       </form>
