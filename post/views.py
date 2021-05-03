@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.template import loader
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from .forms import SubmitPost
 from .models import Post, Thread
@@ -60,9 +61,16 @@ class LogIn(View):
         return render(request, "post/logIn.html", context)
 
     def post(self, request):
-        print(request.POST["username"])
-        print(request.POST["password"])
-        return HttpResponse('hi')
+        # if request.POST.has_key("username"):
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username = username, password = password)
+        if user is not None:
+            login(request, user)
+            return HttpResponse('logged in as ' + str(user))
+            
+            
+        return HttpResponse('invalid')
 
 class NewPost(View):
     def get(self, request):
