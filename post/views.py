@@ -17,7 +17,7 @@ from .models import Post
 
 def index(request):
     # temporary landing page
-    return HttpResponse('<a href="/posts/">posts here hi</a>')
+    return HttpResponse('<a href="/posts/">Welcome!</a>')
 
 
 def detail(request, post_id):
@@ -79,7 +79,6 @@ class NewPost(View):
         return render(request, "post/newPost.html", context)
 
     def post(self, request):
-        print(request.POST)
         form = request.POST
         save_data = Post.objects.create(
             userPosted=get_object_or_404(User, pk=form["userPosted"]),
@@ -109,3 +108,28 @@ def post_list_view(request):
     context = {"post_objects": post_objects}
     return render(request, "post/index.html", context)
 
+class MainPage(View):
+    def post(self, request):
+        print("foo")
+        if 'logout' in request.POST.keys():
+            print("Foo")
+            logout(request)
+        else:
+            print("Bar")
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username = username, password = password)
+            if user is not None:
+                login(request, user)
+
+        post_objects = Post.objects.order_by("pub_date")
+        context = {"post_objects": post_objects}
+        
+        return render(request, "post/index.html", context)
+            
+
+    def get(self, request):
+        print("bar")
+        post_objects = Post.objects.order_by("pub_date")
+        context = {"post_objects": post_objects}
+        return render(request, "post/index.html", context)
