@@ -12,6 +12,15 @@
     <title>{{post.title}}</title>
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand text-light">Forum</a>
+        {% if user.is_authenticated %}
+  
+        <!-- If someone is logged in, we welocme them and give them <thead>
+            opportunity to log out. -->
+        <span class="navbar-text"> Welcome, {{user}}! </span>
+        {% endif %}
+      </nav>
     <!-- Go back to the post page -->
     <div class="container">
         <a href="/posts/">Back</a>

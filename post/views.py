@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.template import loader
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render,HttpResponseRedirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
@@ -88,7 +88,7 @@ class NewPost(View):
             pub_date=datetime.datetime.now(),
         )
         save_data.save()
-        return HttpResponse("view my post" + str(save_data.id))
+        return HttpResponseRedirect("/posts/" + str(save_data.id))
         # verify
         # if form.is_valid():
         #     print('Valid')
@@ -110,26 +110,23 @@ def post_list_view(request):
 
 class MainPage(View):
     def post(self, request):
-        print("foo")
         if 'logout' in request.POST.keys():
-            print("Foo")
             logout(request)
         else:
-            print("Bar")
             username = request.POST["username"]
             password = request.POST["password"]
             user = authenticate(request, username = username, password = password)
             if user is not None:
                 login(request, user)
 
-        post_objects = Post.objects.order_by("pub_date")
-        context = {"post_objects": post_objects}
+        # post_objects = Post.objects.order_by("pub_date")
+        # context = {"post_objects": post_objects}
         
-        return render(request, "post/index.html", context)
+        # return render(request, "post/index.html", context)
+        return HttpResponseRedirect(request.path)
             
 
     def get(self, request):
-        print("bar")
         post_objects = Post.objects.order_by("pub_date")
         context = {"post_objects": post_objects}
         return render(request, "post/index.html", context)
