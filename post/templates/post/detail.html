@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- bootstrap cdn -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
     <title>{{post.title}}</title>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand text-light">Forum</a>
-        {% if user.is_authenticated %}
-  
-        <!-- If someone is logged in, we welocme them and give them <thead>
+      <a class="navbar-brand text-light">Forum</a>
+      {% if user.is_authenticated %}
+
+      <!-- If someone is logged in, we welocme them and give them <thead>
             opportunity to log out. -->
-        <span class="navbar-text"> Welcome, {{user}}! </span>
-        {% endif %}
-      </nav>
+      <span class="navbar-text"> Welcome, {{user}}! </span>
+      {% endif %}
+    </nav>
     <!-- Go back to the post page -->
     <div class="container">
-        <a href="/posts/">Back</a>
+      <a href="/posts/">Back</a>
     </div>
     <!-- displaying the post info -->
     <div class="container">
-        <h1>{{post.title}}</h1>
-        <p>{{post.content}}</p>
-        <p>posted by {{post.userPosted}}</p>
-        <p>{{post.pub_date.date}}</p>
-        <p>{{post.pub_date.time}}</p>
+      <h1>{{post.title}}</h1>
+      <p>{{post.content}}</p>
+      <p>posted by {{post.userPosted}}</p>
+      <p>{{post.pub_date.date}}</p>
+      <p>{{post.pub_date.time}}</p>
     </div>
-</body>
+  </body>
 </html>

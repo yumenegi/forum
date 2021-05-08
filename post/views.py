@@ -127,6 +127,6 @@ class MainPage(View):
             
 
     def get(self, request):
-        post_objects = Post.objects.order_by("pub_date")
+        post_objects = Post.objects.order_by("-pub_date")
         context = {"post_objects": post_objects}
         return render(request, "post/index.html", context)
