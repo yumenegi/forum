@@ -20,27 +20,45 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand text-light">Forum</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         {% if user.is_authenticated %}
-
         <!-- If someone is logged in, we welocme them and give them <thead>
-            opportunity to log out. -->
-        <span class="navbar-text"> Welcome, {{user}}! </span>
-        <form class="form-inline" action="" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="logout" value="logout"></input>
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
+                opportunity to log out. -->
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <span class="navbar-text"> Welcome, {{user}}! </span>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="../new/">Create Post</a>
+                </li>
+            </ul>
+            <span class="navbar-text mr-3">
+                Welcome, {{user}}!
+            </span>
+            <form class="form-inline" action="" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="logout" value="logout"></input>
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+
         {% else %}
-        <form class="form-inline" action="" method="POST">
-            {% csrf_token %}
-            <input type="text" class="form-control" name="username" id="username" placeholder="Username" required />
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">
-                Log In
-            </button>
-        </form>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <form class="form-inline ml-auto" action="" method="POST">
+                {% csrf_token %}
+                <input type="text" class="form-control mr-1 my-1" name="username" id="username" placeholder="Username" required />
+                <input type="password" class="form-control mr-1 my-1" name="password" id="password" placeholder="Password" required />
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                    Log In
+                </button>
+            </form>
+        </div>
         {% endif %}
     </nav>
     <!-- title -->
