@@ -74,14 +74,18 @@ class LogIn(View):
 
 class NewPost(View):
     def get(self, request):
+        if request.user.is_anonymous:
+            return HttpResponse("Please Sign In")
+        
         form = SubmitPost()
         context = {"form": form}
         return render(request, "post/newPost.html", context)
 
+
     def post(self, request):
         form = request.POST
         save_data = Post.objects.create(
-            userPosted=get_object_or_404(User, pk=form["userPosted"]),
+            userPosted=request.user,
             thread=get_object_or_404(Thread, pk=form["thread"]),
             title=form["title"],
             content=form["content"],
