@@ -134,3 +134,26 @@ class MainPage(View):
         post_objects = Post.objects.order_by("-pub_date")
         context = {"post_objects": post_objects}
         return render(request, "post/index.html", context)
+
+class Threads(View):
+    def post(self, request):
+        if 'logout' in request.POST.keys():
+            logout(request)
+        else:
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username = username, password = password)
+            if user is not None:
+                login(request, user)
+
+        # post_objects = Post.objects.order_by("pub_date")
+        # context = {"post_objects": post_objects}
+        
+        # return render(request, "post/index.html", context)
+        return HttpResponseRedirect(request.path)
+            
+
+    def get(self, request):
+        thread_object = Thread.objects.all()
+        context = {"thread_object": thread_object}
+        return render(request, "post/thread.html", context)

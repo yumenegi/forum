@@ -16,7 +16,7 @@ class Profile(models.Model):
         return (str(self.user) + "'s profile")
 
 class Thread(models.Model):
-    title = models.TextField(max_length=100)
+    title = models.TextField(max_length=30, primary_key=True)
 
     def __str__(self):
         return self.title
@@ -26,7 +26,7 @@ class Post(models.Model):
     userPosted = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True)
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE,null=True, blank=True)
     title = models.CharField(max_length=30)
-    content = models.CharField(max_length=500)
+    content = models.CharField(max_length=2000)
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
