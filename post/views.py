@@ -84,9 +84,11 @@ class NewPost(View):
 
     def post(self, request):
         form = request.POST
+        thre = Thread.objects.get(pk=form["thread"])
+        print(thre)
         save_data = Post.objects.create(
             userPosted=request.user,
-            thread=get_object_or_404(Thread, pk=form["thread"]),
+            thread=thre,
             title=form["title"],
             content=form["content"],
             pub_date=datetime.datetime.now(),
@@ -106,11 +108,6 @@ class NewPost(View):
         #     return HttpResponse('view my post')
 
         # return HttpResponse('invalid')
-
-def post_list_view(request):
-    post_objects = Post.objects.order_by("pub_date")
-    context = {"post_objects": post_objects}
-    return render(request, "post/index.html", context)
 
 class MainPage(View):
     def post(self, request):
@@ -157,3 +154,30 @@ class Threads(View):
         thread_object = Thread.objects.all()
         context = {"thread_object": thread_object}
         return render(request, "post/thread.html", context)
+
+# class ThreadView(View):
+#     def post(self, request, thread_id):
+#         if 'logout' in request.POST.keys():
+#             logout(request)
+#         else:
+#             username = request.POST["username"]
+#             password = request.POST["password"]
+#             user = authenticate(request, username = username, password = password)
+#             if user is not None:
+#                 login(request, user)
+
+#         # post_objects = Post.objects.order_by("pub_date")
+#         # context = {"post_objects": post_objects}
+        
+#         # return render(request, "post/index.html", context)
+#         return HttpResponseRedirect(request.path)
+            
+
+#     def get(self, request, thread_id):
+#         # print(thread_id)
+#         request_thread = get_object_or_404(Thread, pk=thread_id)
+#         # print(type(request_thread))
+#         post_objects = Post.objects.filter(thread=request_thread)
+#         print(post_objects)
+#         context = {"post_objects": post_objects}
+#         return render(request, "post/index.html", context)
