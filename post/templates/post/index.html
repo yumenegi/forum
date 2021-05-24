@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Test</title>
+    <title>/all/</title>
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
@@ -21,7 +21,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand text-light">Forum</a>
+        <a class="navbar-brand text-light" href="/all/">/all/</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,6 +36,9 @@
                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="../new/">Create Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../new/thread">Create Thread</a>
                 </li>
             </ul>
             <span class="navbar-text mr-3">
@@ -63,7 +66,8 @@
     </nav>
     <!-- title -->
     <div class="container">
-        <h1>This is the list of all posts.</h1>
+        <h1>Welcome to /all/.</h1> 
+        <a href="/threads/">view all forums</a>
     </div>
     <hr />
 
@@ -71,7 +75,7 @@
     {% for post in post_objects %}
     <div class="container">
         <h1><a href="/posts/{{post.id}}">{{post.title}}</a></h1>
-        <p>posted by {{post.userPosted}}</p>
+        <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
         <p>{{post.pub_date.date}}</p>
         <p>{{post.pub_date.time}}</p>
     </div>

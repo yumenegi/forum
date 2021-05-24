@@ -22,7 +22,7 @@
 
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand text-light">Forum</a>
+        <a class="navbar-brand text-light" href="/all/">/all/</a>
         {% if user.is_authenticated %}
 
         <!-- If someone is logged in, we welocme them and give them <thead>
@@ -38,7 +38,7 @@
     <div class="container">
         <h1>{{post.title}}</h1>
         <p>{{post.content}}</p>
-        <p>posted by {{post.userPosted}}</p>
+        <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
         <p>{{post.pub_date.date}}</p>
         <p>{{post.pub_date.time}}</p>
     </div>

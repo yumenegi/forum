@@ -19,8 +19,17 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand text-light" href="/all/">/all/</a>
+    {% if user.is_authenticated %}
+
+    <!-- If someone is logged in, we welocme them and give them <thead>
+        opportunity to log out. -->
+    <span class="navbar-text"> Welcome, {{user}}! </span>
+    {% endif %}
+  </nav>
   <div class="container">
-    <form action="" method="post">
+    <form action="" method="post" class="mt-3">
       {% csrf_token %}
       <label for="id_thread">Thread: </label>
       {{form.thread}}<br>

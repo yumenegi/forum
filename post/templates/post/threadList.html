@@ -21,7 +21,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand text-light" href="/posts/">Forum</a>
+        <a class="navbar-brand text-light" href="/all/">/all/</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -63,7 +63,7 @@
     </nav>
     <!-- title -->
     <div class="container">
-        <h1>This is the list of all posts.</h1>
+        <h1>Welcome to /{{title}}/.</h1>
     </div>
     <hr />
 
@@ -71,7 +71,7 @@
     {% for post in post_objects %}
     <div class="container">
         <h1><a href="/posts/{{post.id}}">{{post.title}}</a></h1>
-        <p>posted by {{post.userPosted}}</p>
+        <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
         <p>{{post.pub_date.date}}</p>
         <p>{{post.pub_date.time}}</p>
     </div>
