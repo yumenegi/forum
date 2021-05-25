@@ -95,19 +95,14 @@ class NewPost(View):
         )
         save_data.save()
         return HttpResponseRedirect("/posts/" + str(save_data.id))
-        # verify
-        # if form.is_valid():
-        #     print('Valid')
-        #     # save data to the modele
-        #     save_data = form.save(commit=False)
-        #     save_data.pub_date = datetime.datetime.now()
-        #     save_data.save()
-        #     # save_data.pub_time = datetime.datetime.now()
-        #     # save_data.save()
-        #     # redirect to the post that was just posted
-        #     return HttpResponse('view my post')
 
-        # return HttpResponse('invalid')
+class NewThread(View):
+    def get(self, request):
+        if request.user.is_anonymous:
+            return HttpResponse("Please Sign In")
+        return render(request, 'post/newForum.html')
+    def post(self, request):
+        pass
 
 
 class MainPage(View):
