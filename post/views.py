@@ -84,11 +84,10 @@ class NewPost(View):
 
     def post(self, request):
         form = request.POST
-        thre = Thread.objects.get(pk=form["thread"])
-        print(thre)
+        # print(thre)
         save_data = Post.objects.create(
             userPosted=request.user,
-            thread=thre,
+            thread=Thread.objects.get(pk=form["thread"]),
             title=form["title"],
             content=form["content"],
             pub_date=datetime.datetime.now(),
@@ -102,7 +101,13 @@ class NewThread(View):
             return HttpResponse("Please Sign In")
         return render(request, 'post/newForum.html')
     def post(self, request):
-        pass
+        form = request.POST
+        save_data = Thread.objects.create(
+            title=form["title"]
+        )
+        save_data.save()
+        return HttpResponseRedirect("/threads/" + str(save_data.id))
+        
 
 
 class MainPage(View):

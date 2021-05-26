@@ -16,7 +16,7 @@ class Profile(models.Model):
         return (str(self.user) + "'s profile")
 
 class Thread(models.Model):
-    title = models.TextField(max_length=30)
+    title = models.TextField(max_length=3)
 
     def __str__(self):
         return self.title
