@@ -17,7 +17,7 @@ from .models import Post
 
 def index(request):
     # temporary landing page
-    return HttpResponse('<a href="/all/">Welcome!</a>')
+    return render(request,"post/landing.html")
 
 
 def detail(request, post_id):
