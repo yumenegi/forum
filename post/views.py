@@ -156,7 +156,7 @@ class Threads(View):
 
 
 class ThreadView(View):
-    def post(self, request, thread_id):
+    def post(self, request):
         if "logout" in request.POST.keys():
             logout(request)
         else:
