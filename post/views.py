@@ -197,6 +197,16 @@ class Register(View):
         context = {"form":form}
         return render(request, 'post/register.html', context)
 
+class MyProfile(View):
+    def get(self, request):
+        if not request.user.is_anonymous:
+            post = Post.objects.filter(user=request.user)
+            context = {'post', post}
+            return render(request, 'post/profile.html', context)
+        
+        else:
+            return HttpResponse("Please sign in.")
+
 # user regist
 # deletion
 # styling
