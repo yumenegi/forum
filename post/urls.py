@@ -11,4 +11,5 @@ urlpatterns = [
     path('new/', views.NewPost.as_view(), name="new_post"),
     path('new/thread', views.NewThread.as_view(), name="new_post"),
     path('login/', views.LogIn.as_view(), name='login'),
+    path('register/', views.Register.as_view(), name='register'),
 ]

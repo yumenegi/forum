@@ -2,10 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+    <meta charset="UTF-8">
+
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
@@ -18,30 +16,20 @@
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <title>{{post.title}}</title>
+    <title>Document</title>
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand text-light" href="/all/">/all/</a>
-        {% if user.is_authenticated %}
-
-        <!-- If someone is logged in, we welocme them and give them <thead>
-            opportunity to log out. -->
-        <span class="navbar-text"> Welcome, {{user}}! </span>
-        {% endif %}
-    </nav>
-    <!-- Go back to the post page -->
+      </nav>
     <div class="container">
-        <a href="/all/">Back</a>
-    </div>
-    <!-- displaying the post info -->
-    <div class="container">
-        <h1>{{post.title}}</h1>
-        <p>{{post.content}}</p>
-        <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
-        <p>{{post.pub_date.date}}</p>
-        <p>{{post.pub_date.time}}</p>
+        <form method="POST" class="form-group">
+            {% load crispy_forms_tags %}
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
     </div>
 </body>
 

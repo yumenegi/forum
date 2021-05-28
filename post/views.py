@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
-from .forms import SubmitPost
+from .forms import SubmitPost, RegisterForm
 from .models import Post, Thread
 import datetime
 
@@ -17,7 +17,7 @@ from .models import Post
 
 def index(request):
     # temporary landing page
-    return render(request,"post/landing.html")
+    return render(request, "post/landing.html")
 
 
 def detail(request, post_id):
@@ -68,7 +68,7 @@ class LogIn(View):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse("logged in as " + str(user))
+            return HttpResponseRedirect("/all/")
 
         return HttpResponse("invalid")
 
@@ -95,19 +95,18 @@ class NewPost(View):
         save_data.save()
         return HttpResponseRedirect("/posts/" + str(save_data.id))
 
+
 class NewThread(View):
     def get(self, request):
         if request.user.is_anonymous:
             return HttpResponse("Please Sign In")
-        return render(request, 'post/newForum.html')
+        return render(request, "post/newForum.html")
+
     def post(self, request):
         form = request.POST
-        save_data = Thread.objects.create(
-            title=form["title"]
-        )
+        save_data = Thread.objects.create(title=form["title"])
         save_data.save()
         return HttpResponseRedirect("/threads/" + str(save_data.id))
-        
 
 
 class MainPage(View):
@@ -181,3 +180,23 @@ class ThreadView(View):
         print(post_objects)
         context = {"post_objects": post_objects, "title": request_thread.title}
         return render(request, "post/threadList.html", context)
+
+
+class Register(View):
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            return HttpResponse('Invalid')
+
+        return HttpResponseRedirect('/login/')
+
+    def get(self, request):
+        form = RegisterForm()
+        context = {"form":form}
+        return render(request, 'post/register.html', context)
+
+# user regist
+# deletion
+# styling
