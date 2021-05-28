@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <!-- <li class="nav-item">
-                    <span class="navbar-text"> Welcome, {{user}}! </span>
+                    <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="../new/">Create Post</a>
@@ -44,7 +44,7 @@
                 </li>
             </ul>
             <span class="navbar-text mr-3">
-                Welcome, {{user}}!
+                Welcome, <a href="/profile/{{user.id}}">{{user}}</a>!
             </span>
             <form class="form-inline" action="" method="POST">
                 {% csrf_token %}
@@ -57,7 +57,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <!-- <li class="nav-item">
-                    <span class="navbar-text"> Welcome, {{user}}! </span>
+                    <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="/register/">Register</a>

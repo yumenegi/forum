@@ -26,7 +26,7 @@
 
     <!-- If someone is logged in, we welocme them and give them <thead>
         opportunity to log out. -->
-    <span class="navbar-text"> Welcome, {{user}}! </span>
+    <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
     {% endif %}
   </nav>
   <div class="container">

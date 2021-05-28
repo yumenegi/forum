@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
-  
-    <title>Test</title>
+    <title>/all/</title>
+    
+    
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
@@ -36,14 +37,14 @@
                     <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="../../new/">Create Post</a>
+                    <a class="nav-link" href="/new/">Create Post</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../new/thread">Create Thread</a>
+                    <a class="nav-link" href="/new/thread">Create Thread</a>
                 </li>
             </ul>
             <span class="navbar-text mr-3">
-                Welcome, <a href="/profile/{{user.id}}">{{user}}</a>!
+                Welcome, {{user}}!
             </span>
             <form class="form-inline" action="" method="POST">
                 {% csrf_token %}
@@ -54,6 +55,14 @@
 
         {% else %}
         <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/register/">Register</a>
+                </li>
+            </ul>
             <form class="form-inline ml-auto" action="" method="POST">
                 {% csrf_token %}
                 <input type="text" class="form-control mr-1 my-1" name="username" id="username" placeholder="Username" required />
@@ -65,13 +74,18 @@
         </div>
         {% endif %}
     </nav>
-    <!-- title -->
+    {% if is_self %}
+    {% for post in post_objects %}
     <div class="container">
-        <h1>Welcome to /{{title}}/.</h1>
+        <h1><a href="/posts/{{post.id}}">{{post.title}}</a></h1>
+        <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
+        <p>{{post.pub_date.date}}</p>
+        <p>{{post.pub_date.time}}</p>
+        <a href="/posts/{{post.id}}/delete">delete</a>
     </div>
     <hr />
-
-    <!-- display everything in the post objects in a for loop-->
+    {% endfor %}
+    {% else %}
     {% for post in post_objects %}
     <div class="container">
         <h1><a href="/posts/{{post.id}}">{{post.title}}</a></h1>
@@ -81,7 +95,6 @@
     </div>
     <hr />
     {% endfor %}
-    <!-- end of the displaying of the list -->
+    {% endif %}
 </body>
-
 </html>
