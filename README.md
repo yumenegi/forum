@@ -1,2 +1,5 @@
 # forum
-final commit db4b3e2
+final commit d63b15f
+User registratioon
+Post deletion
+Styling
