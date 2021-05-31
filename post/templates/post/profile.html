@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>User Profile</title>
+    <title>User Profile: {{profile_owner}}</title>
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
@@ -21,19 +21,18 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- link back to homepage -->
         <a class="navbar-brand text-light" href="/all/">/all/</a>
+        <!-- collapse button for when on mobile -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- if a user is logged in -->
         {% if user.is_authenticated %}
-        <!-- If someone is logged in, we welocme them and give them <thead>
-                opportunity to log out. -->
         <div class="collapse navbar-collapse" id="navbarText">
+            <!-- allows user to create post and create thread -->
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item">
-                    <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="/new/">Create Post</a>
                 </li>
@@ -41,14 +40,17 @@
                     <a class="nav-link" href="/new/thread">Create Thread</a>
                 </li>
             </ul>
+            <!-- if user is the owner of the profile page, welcome them -->
             {% if is_self %}
             <span class="navbar-text mr-3">
                 Welcome, {{user}}!
             </span>
+            <!-- if user is not the owner, allows them to go to their own page -->
             {% else %}
             <span class="navbar-text mr-3">
                 Welcome, <a href="/profile/{{user.id}}">{{user}}</a>!
             </span>
+            <!-- logout option -->
             {% endif %}
             <form class="form-inline" action="" method="POST">
                 {% csrf_token %}
@@ -57,19 +59,21 @@
             </form>
         </div>
 
+        <!-- if no user signed in -->
         {% else %}
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item">
-                    <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
-                </li> -->
+                <!-- gives them option to login -->
                 <li class="nav-item">
                     <a class="nav-link" href="/register/">Register</a>
                 </li>
             </ul>
+            <!-- form allows user to log in -->
             <form class="form-inline ml-auto" action="" method="POST">
                 {% csrf_token %}
+                <!-- username -->
                 <input type="text" class="form-control mr-1 my-1" name="username" id="username" placeholder="Username" required />
+                <!-- password -->
                 <input type="password" class="form-control mr-1 my-1" name="password" id="password" placeholder="Password" required />
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">
                     Log In
@@ -78,23 +82,40 @@
         </div>
         {% endif %}
     </nav>
+    <!-- if user is the owner of the page -->
     {% if is_self %}
+    <!-- welcomes user to their own page -->
+    <h1>Welcome home, {{user}}!</h1>
+    <!-- adds ability for user to delete their own post -->
     {% for post in post_objects %}
     <div class="container">
+        <!-- post title -->
         <h1><a href="/posts/{{post.id}}">{{post.title}}</a></h1>
-        <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
+        <!-- posted thread -->
+        <p>posted in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
+        <!-- posted date -->
         <p>{{post.pub_date.date}}</p>
+        <!-- posted time -->
         <p>{{post.pub_date.time}}</p>
+        <!-- redirect to deletion confirmation page -->
         <a href="/posts/{{post.id}}/delete">delete</a>
     </div>
     <hr />
     {% endfor %}
+    <!-- if this is someone's page, no deletion option -->
     {% else %}
+    <!-- displays who the owner of the profile is -->
+    <h1>This is the profile of {{profile_owner}}</h1>
+    <!-- renders all posts by the user -->
     {% for post in post_objects %}
     <div class="container">
+        <!-- post title -->
         <h1><a href="/posts/{{post.id}}">{{post.title}}</a></h1>
-        <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
+        <!-- posted thread -->
+        <p>posted in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
+        <!-- posted time -->
         <p>{{post.pub_date.date}}</p>
+        <!-- posted date -->
         <p>{{post.pub_date.time}}</p>
     </div>
     <hr />
