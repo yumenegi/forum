@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
   
-    <title>Test</title>
+    <title>welcome to /{{title}}/</title>
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
@@ -22,29 +22,32 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- link back to index page -->
         <a class="navbar-brand text-light" href="/all/">/all/</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- hidden toggle when on mobile device -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- displays when there is a user logged in -->
         {% if user.is_authenticated %}
-        <!-- If someone is logged in, we welocme them and give them <thead>
-                opportunity to log out. -->
         <div class="collapse navbar-collapse" id="navbarText">
+            <!-- links -->
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item">
-                    <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}">{{user}}</a>! </span>
-                </li> -->
+                <!-- link to create new post -->
                 <li class="nav-item">
-                    <a class="nav-link" href="../../new/">Create Post</a>
+                    <a class="nav-link" href="/new/">Create Post</a>
                 </li>
+                <!-- link to create new thread -->
                 <li class="nav-item">
-                    <a class="nav-link" href="../../new/thread">Create Thread</a>
+                    <a class="nav-link" href="/new/thread">Create Thread</a>
                 </li>
             </ul>
+
+            <!-- welcome user -->
             <span class="navbar-text mr-3">
                 Welcome, <a href="/profile/{{user.id}}">{{user}}</a>!
             </span>
+            <!-- if some one is logged in, give them opportunity to log out -->
             <form class="form-inline" action="" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="logout" value="logout"></input>
@@ -52,8 +55,16 @@
             </form>
         </div>
 
+        <!-- there is no user signed in -->
         {% else %}
         <div class="collapse navbar-collapse" id="navbarText">
+            <!-- link to registration page -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register/">Register</a>
+                </li>
+            </ul>
+            <!-- inline form for the user to sign in if the user has an account -->
             <form class="form-inline ml-auto" action="" method="POST">
                 {% csrf_token %}
                 <input type="text" class="form-control mr-1 my-1" name="username" id="username" placeholder="Username" required />
@@ -65,6 +76,7 @@
         </div>
         {% endif %}
     </nav>
+
     <!-- title -->
     <div class="container">
         <h1>Welcome to /{{title}}/.</h1>
@@ -72,6 +84,7 @@
     <hr />
 
     <!-- display everything in the post objects in a for loop-->
+    <!-- all posts are from the same thread -->
     {% for post in post_objects %}
     <div class="container">
         <h1><a href="/posts/{{post.id}}">{{post.title}}</a></h1>

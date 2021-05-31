@@ -1,3 +1,4 @@
+<!-- Page for user to create a new account -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,17 +17,21 @@
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Create a New Account</title>
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark">
+        <!-- return to homepage -->
         <a class="navbar-brand text-light" href="/all/">/all/</a>
       </nav>
     <div class="container">
         <form method="POST" class="form-group">
+            <!-- load plugin tag -->
             {% load crispy_forms_tags %}
             {% csrf_token %}
+            <!-- pass form through the plugin filter -->
             {{ form|crispy }}
             <button type="submit" class="btn btn-primary">Register</button>
         </form>

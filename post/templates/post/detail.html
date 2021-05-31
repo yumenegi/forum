@@ -34,10 +34,15 @@
     </div>
     <!-- displaying the post info -->
     <div class="container">
+        <!-- post title -->
         <h1>{{post.title}}</h1>
+        <!-- post content -->
         <p>{{post.content}}</p>
+        <!-- posted user and thread -->
         <p>posted by {{post.userPosted}} in <a href="/threads/{{post.thread.id}}">/{{post.thread.title}}/</a></p>
+        <!-- posted date -->
         <p>{{post.pub_date.date}}</p>
+        <!-- posted time -->
         <p>{{post.pub_date.time}}</p>
     </div>
 </body>

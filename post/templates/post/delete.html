@@ -22,9 +22,13 @@
         <div class="row">
             <!-- display information abou the post the user is about to delete -->
             <div class="col-6 mx-auto">
+                <!-- post title -->
                 <h1>Are you sure you want to delete "{{post.title}}"?</h1>
+                <!-- posted user and thread -->
                 <p>posted by {{post.userPosted}} in /{{post.thread.title}}/</p>
+                <!-- posted date -->
                 <p>On {{post.pub_date.date}}</p>
+                <!-- posted time -->
                 <p>At {{post.pub_date.time}}</p>
             </div>
         </div>
