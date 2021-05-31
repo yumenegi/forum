@@ -43,9 +43,15 @@
                     <a class="nav-link" href="/new/thread">Create Thread</a>
                 </li>
             </ul>
+            {% if is_self %}
             <span class="navbar-text mr-3">
                 Welcome, {{user}}!
             </span>
+            {% else %}
+            <span class="navbar-text mr-3">
+                Welcome, <a href="/profile/{{user.id}}">{{user}}</a>!
+            </span>
+            {% endif %}
             <form class="form-inline" action="" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="logout" value="logout"></input>

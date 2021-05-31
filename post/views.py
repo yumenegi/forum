@@ -17,7 +17,6 @@ from .models import Post
 
 
 def index(request):
-    # temporary landing page
     return render(request, 'post/landing.html')
 
 
@@ -26,35 +25,6 @@ def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     context = {'post': post}
     return render(request, 'post/detail.html', context)
-
-
-# def new_post(request):
-#     # create form
-#     form = SubmitPost()
-
-#     # if there is data coming in, normally GET, but when data, POST
-#     if request.method == 'POST':
-#         # print('POST!')
-#         # print(request.POST)
-
-#         # create the model form the QueryDict
-#         form = SubmitPost(request.POST)
-
-#         # varify
-#         if form.is_valid():
-#             print('Valid')
-#             # save data to the modele
-#             save_data = form.save()
-#             # redirect to the post that was just posted
-#             return redirect('/posts/' + str(save_data.id) + '/')
-#     # print(form)
-
-#     # if just opened the page
-#     else:
-#         context = {
-#             'form' : form
-#         }
-#         return render(request, 'post/newPost.html', context)
 
 
 class LogIn(View):
@@ -101,7 +71,7 @@ class NewThread(View):
     def get(self, request):
         if request.user.is_anonymous:
             return HttpResponse('Please Sign In')
-        return render(request, 'post/newForum.html')
+        return render(request, 'post/newThread.html')
 
     def post(self, request):
         form = request.POST

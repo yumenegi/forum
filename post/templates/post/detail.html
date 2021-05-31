@@ -1,11 +1,8 @@
+<!-- Page to display details of a post -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
@@ -22,16 +19,16 @@
 </head>
 
 <body>
+    <!-- Navigation bar -->
     <nav class="navbar navbar-dark bg-dark">
+        <!-- home link -->
         <a class="navbar-brand text-light" href="/all/">/all/</a>
+        <!-- if a user is signed in, welcome them -->
         {% if user.is_authenticated %}
-
-        <!-- If someone is logged in, we welocme them and give them <thead>
-            opportunity to log out. -->
         <span class="navbar-text"> Welcome, <a href="/profile/{{user.id}}"></a>{{user}}</a>! </span>
         {% endif %}
     </nav>
-    <!-- Go back to the post page -->
+    <!-- Return to the index page -->
     <div class="container">
         <a href="/all/">Back</a>
     </div>

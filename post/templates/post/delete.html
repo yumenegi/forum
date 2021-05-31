@@ -1,7 +1,9 @@
+<!-- Page to ask user to confirm post deletion -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -13,28 +15,34 @@
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Are you sure you want to delete?</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
+            <!-- display information abou the post the user is about to delete -->
             <div class="col-6 mx-auto">
-                <h1>{{post.title}}</h1>
+                <h1>Are you sure you want to delete "{{post.title}}"?</h1>
                 <p>posted by {{post.userPosted}} in /{{post.thread.title}}/</p>
-                <p>{{post.pub_date.date}}</p>
-                <p>{{post.pub_date.time}}</p>
+                <p>On {{post.pub_date.date}}</p>
+                <p>At {{post.pub_date.time}}</p>
             </div>
         </div>
+        <!-- Ask user for confirmation if they want to delete the post -->
         <div class=row>
+            <!-- This button returns user to back to profile page, it carries no hidden data -->
             <div class="col-2 ml-auto">
                 <form class="form" action="" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-primary">Back</button>
                 </form>
             </div>
+            <!-- This button deletes the post -->
+            <!-- it carries a hidden data to tell the view script that the user wants to delete the post -->
             <div class="col-2 mr-auto">
                 <form class="form" action="" method="POST">
                     {% csrf_token %}
+                    <!-- this input helps view identify whether user clicked the delete button -->
                     <input type="hidden" name="delete" value="delete"></input>
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
