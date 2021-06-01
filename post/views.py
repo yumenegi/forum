@@ -145,7 +145,7 @@ class Threads(View):
 
 # display all posts in a specific thread
 class ThreadView(View):
-    def post(self, request):
+    def post(self, request, thread_id):
         # user requested to log out
         if 'logout' in request.POST.keys():
             logout(request)
