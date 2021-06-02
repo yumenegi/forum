@@ -194,7 +194,7 @@ class Register(View):
 
 # user profile page
 class Profile(View):
-    def post(self, request):
+    def post(self, request, user_id):
         # user requested to log out
         if 'logout' in request.POST.keys():
             logout(request)
