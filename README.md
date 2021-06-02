@@ -1,5 +1,5 @@
 # Django Based Forum
-Final commit: ffe38a9
+Final commit: 17818e0
 
 ### Current features
 + Basic user control
